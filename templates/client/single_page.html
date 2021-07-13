@@ -1,0 +1,37 @@
+{% extends "client/base.html" %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>Rahbariyat</h3>
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <a class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  {{page.title}}
+                </a>
+              </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body row">
+                <div class="col-3">
+                  <img src="{{ url_for('static', filename='uploads/images/') ~ page.photo | safe }}" alt="" style="width: 250px; height: 170px;">
+                </div>
+                <div class="col">
+                  {{page.content}}
+                </div>
+              </div>
+              <a href="{{ url_for ('home_page_view')}}" class="btn btn-info ml-4 mb-4">orqaga<<</a>
+              <div style="float: right;"><span class="ml-4">Views: <span class="badge badge-secondary">{{page.views}}</span></span> <span>date <span class="badge badge-secondary">{{page.datetime.strftime('%Y-%m-%d, %H:%M:%S')}}</span></span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock main %}

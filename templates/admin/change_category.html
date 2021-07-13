@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+
+{% block main %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-10 offset-1">
+            <h3>Kategoriyani o'zgartirish</h3>
+            <form action="" method="POST">
+                <!-- <div class="my-4"> -->
+                    <!-- <select class="form-select" name="category_id" id="" style="outline: none;"> -->
+                        <!-- <option value="" selected disabled>Choose the category name</option> -->
+                        <!-- {% for kat in kategoriyalar %} -->
+                        <!-- {% if item.cat_id==kat.id %} -->
+                        <!-- <option selected value="{{ kat.id }}">{{kat.name}}</option> -->
+                        <!-- {%else%} -->
+                        <!-- <option value="{{ kat.id }}">{{kat.name}}</option> -->
+                        <!-- {% endif %} -->
+                        <!-- {% endfor %} -->
+                    <!-- </select> -->
+                <!-- </div> -->
+                <div class="input-group mb-3 mt-3">
+                    <input type="text" class="form-control" placeholder="Enter the category title"
+                        aria-label="Person Title" aria-describedby="basic-addon1" name="category_name"
+                        autocomplete="off" />
+                </div>
+
+                <input type="submit" class="btn btn-outline-success" value="Create">
+                <a href="{{ url_for('admin_page_view') }}" type="reset" class="btn btn-outline-info">Cancel</a>
+            </form>
+        </div>
+    </div>
+    {% endblock %}

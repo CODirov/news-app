@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+
+{% block main %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-10 offset-1">
+            <h3>Kategoriya qo'shish</h3>
+            <form action=""  method="POST">
+            <div class="input-group mb-3 mt-3">
+                <input type="text"
+                 class="form-control" 
+                 placeholder="Enter the category title" 
+                 aria-label="Person Title"
+                 aria-describedby="basic-addon1" 
+                 name="category_name"
+                 autocomplete="off"/>
+            </div>
+
+        <input type="submit" class="btn btn-outline-success" value="Create">
+        <a href="{{ url_for('admin_page_view') }}" type="reset" class="btn btn-outline-info">Cancel</a>
+    </form>
+      </div>
+</div>
+{% endblock %}

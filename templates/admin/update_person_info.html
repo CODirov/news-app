@@ -1,0 +1,71 @@
+{% extends "admin/base.html" %}
+
+{% block main %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-10 offset-1">
+            <h3>Malumotlarni yangilash</h3>
+            <form action="{{ url_for('update_view', _id=item.id) }}"  method="POST" enctype="multipart/form-data">
+            <div class="input-group mb-3 mt-3">
+                <input type="text"
+                 class="form-control" 
+                 placeholder="Person Title" 
+                 aria-label="Person Title"
+                 aria-describedby="basic-addon1" 
+                 name="person_title"
+                 autocomplete="off"
+                 value="{{item.title}}"/>
+            </div>
+            <div class="input-group mb-3">
+                <div class="form-floating">
+                    <textarea 
+                    class="form-control"
+                    placeholder="Person Content"
+                    name="person_content"
+                    rows="10"
+                    cols="130"
+                    >{{item.content}}</textarea>
+        </div>
+    </div>
+    <div class="input-group mb-3 ml-4">
+          <input 
+           class="form-check-input "
+           name="publish_status"
+           type="checkbox" 
+           id="publish_status"
+           value="True"
+           {% if item.is_published %}
+           checked
+           {% endif %}/>
+           <label for="publish_status">Chop etilsin</label>
+        </div>
+        {% if item.photo %}
+        <div style="width: 250px; position: relative;">
+            <img src="{{ url_for('static', filename='uploads/images/' ~ item.photo ) }}" class="img-thumbnail" style="width: 100%; position: relative;">
+            <a href="{{ url_for('update_view', _id=item.id, action='delete-thumb') }}">
+            <img src="{{ url_for('static', filename='images/icons/close.svg') }}" style="width: 20px; position: absolute; top: 10px; right: 10px;">
+            </a>
+        </div>
+        {% else %}
+        <div class="input-group mb-3">
+        <input type="file" name="person's photo">
+        </div>
+        {% endif %}
+        <div class="my-4">
+            <select class="form-select" name="category_id" id="" style="outline: none;">
+                <option value="" selected disabled>Choose the category name</option>
+                {% for kat in kategoriyalar %}
+                {% if item.cat_id==kat.id %}
+                <option selected value="{{ kat.id }}">{{kat.name}}</option>
+                {%else%}
+                <option value="{{ kat.id }}">{{kat.name}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>    
+        </div>
+        <input type="submit" class="btn btn-outline-success" value="Save Changes">
+        <a href="{{ url_for('admin_page_view') }}" type="reset" class="btn btn-outline-info">Cancel</a>
+    </form>
+      </div>
+</div>
+{% endblock %}

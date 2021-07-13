@@ -1,0 +1,48 @@
+{% extends "client/base.html" %}
+
+{% block main %}
+<div class="container">
+  <h4 class="mt-4 mb-4">Rahbariyat</h4>
+  {% if pages_view %}
+  {% for page_view in pages_view %}
+  <div class="row">
+    <div class="col">
+      {% if page_view.is_published %}
+      <div class="card">
+        <div class="card-header" id="">
+          <h5 class="mb-0">
+            <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+              aria-controls="collapseOne">
+              {{page_view.title|safe}}
+            </a>
+          </h5>
+        </div>
+
+        <div id="" class="" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body row">
+            <div class="col-3">
+              <img src="{{ url_for('static', filename='uploads/images/') ~ page_view.photo | safe }}" alt=""
+                style="width: 250px; height: 170px;">
+            </div>
+            <div class="col">
+              {{page_view.content|safe}}
+            </div>
+          </div>
+          <span class="ml-4">Views: <span class="badge badge-secondary">{{page_view.views}}</span></span> <span>date
+            <span class="badge badge-secondary">{{page_view.datetime.strftime('%Y-%m-%d, %H:%M:%S')}}</span></span>
+          <a href="{{ url_for ('single_page_view', _id=page_view.id)}}" class="btn btn-info mb-3 mr-3"
+            style="float: right;">More</a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <div class="alert alert-warning" role="alert" style="margin: auto;">
+    Bazada siz izlagan ma'lumot topilmadi !! <a href="{{url_for('home_page_view')}}"
+      class="stretched-link text-info">bosh sahifaga</a> qayting
+  </div>
+  {% endif %}
+</div>
+{% endblock main %}

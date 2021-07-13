@@ -1,0 +1,55 @@
+{% extends "admin/base.html" %}
+
+{% block main %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-10 offset-1">
+            <h3>Hodim qo'shish</h3>
+            <form action=""  method="POST" enctype="multipart/form-data">
+            <div class="input-group mb-3 mt-3">
+                <input type="text"
+                 class="form-control" 
+                 placeholder="Person Title" 
+                 aria-label="Person Title"
+                 aria-describedby="basic-addon1" 
+                 name="person_title"
+                 autocomplete="off"/>
+            </div>
+            <div class="input-group mb-3">
+                <div class="form-floating">
+                    <textarea 
+                    class="form-control"
+                    placeholder="Person Content"
+                    name="person_content"
+                    rows="10"
+                    cols="130"
+                    ></textarea>
+        </div>
+    </div>
+    <div class="input-group mb-3 ml-4">
+          <input 
+           class="form-check-input "
+           name="publish_status"
+           type="checkbox" 
+           id="publish_status"
+           value="True">
+           <label for="publish_status">chop etilsin</label>
+        </div>
+        <div class="input-group mb-3">
+        <input type="file" name="person's photo">
+        </div>
+        <div class="my-4">
+            <select class="form-select" name="category_id" id="" style="outline: none;">
+                <option value="" selected disabled>Choose the category name</option>
+                {% for kat in kategoriyalar %}
+                <option value="{{ kat.id }}">{{kat.name}}</option>
+                {% endfor %}
+            </select>    
+        </div>
+        <input type="submit" class="btn btn-outline-success" value="Create">
+        <a href="{{ url_for('admin_page_view') }}" type="reset" class="btn btn-outline-info">Cancel</a>
+    </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+
+{% block main %}
+<div class="container">
+  <div class="mt-4 mb-4">
+    <a class="btn btn-info" href="{{ url_for ('add_person')}}">Hodim qo'shish</a>
+    <a class="btn btn-info" href="{{ url_for ('add_category_view')}}">Kategoriya qo'shish</a>
+    <a class="btn btn-warning" href="{{url_for('logout')}}">Chiqish</a>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+        <th scope="col">Category</th>
+        <th scope="col">Thumbnail</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Views</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pages in all_pages %}
+      <tr>
+        <th scope="row">{{ pages.id }}</th>
+        <td>{{pages.title}}</td>
+        <td>{{pages.content}}</td>
+        <td>
+          {% for kat in kategoriyalar %}
+            {% if kat.id == pages.cat_id %}
+              {{kat.name}}
+            {% endif %}
+          {% endfor %}
+        </td>
+        <td>
+          {% if pages.photo %}
+          <img class="img-thumbnail" src="{{url_for('static', filename='uploads/images/' ~ pages.photo)}}" style="width: 100px;" alt="">
+          {% else %}
+            <i>No Photo</i>
+          {% endif %}
+        </td>
+        <td>{{ pages.datetime.strftime("%Y.%m.%d, %H.%M") }}</td>
+        <td>{{ pages.views }}</td>
+        <td>
+          {% if pages.is_published %}
+          <a href="{{ url_for('admin_page_view', action='make_inactive', _id=pages.id) }}">
+            <img style="width: 20px;" src="{{url_for('static', filename='/images/icons/check.svg')}}">
+          </a>
+          {% else %}
+          <a href="{{ url_for('admin_page_view', action='make_active', _id=pages.id) }}">
+            <img style="width: 20px;" src="{{url_for('static', filename='/images/icons/check2.svg')}}">
+          </a>
+          {% endif %}
+        </td>
+        <td>
+          <a class="btn btn-info btn-sm" href="{{url_for('update_view', _id=pages.id)}}">Update</a>
+        </td>
+        <td>
+          <a class="btn btn-danger btn-sm" href="{{url_for('admin_page_view', action='delete', _id=pages.id)}}">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
